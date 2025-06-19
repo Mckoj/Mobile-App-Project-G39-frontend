@@ -1,5 +1,6 @@
 import { View, Text,SafeAreaView, StyleSheet,StatusBar, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 const Header = ({ title }: { title: string },) => {
   return (
@@ -16,11 +17,11 @@ const Header = ({ title }: { title: string },) => {
    
            <View style= {styles.headerButtonsContainer}>
              <TouchableOpacity  style= {styles.headerButtons}>
-                 <Image source ={require("../../assets/search.jpeg")} style = {styles.avatar}/>
+                 <Ionicons name="search" size={24} color="black"  style = {styles.avatar} />
              </TouchableOpacity>
                 
              <TouchableOpacity style= {styles.headerButtons}>
-                <Image source ={require("../../assets/ama.jpeg")} style = {styles.avatar}/>
+                <MaterialCommunityIcons name="plus-circle-outline" size={24} color="black"  style = {styles.avatar}/>
    
              </TouchableOpacity>
            </View>

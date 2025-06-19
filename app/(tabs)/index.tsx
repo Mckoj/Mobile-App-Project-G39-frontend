@@ -9,7 +9,7 @@ const Index = () => {
     <>
     <Header title="Home"/>
     <Feed/>
-    <Text className='text-xl font-bold text-red-800'>Index bjbj</Text>
+    
     </>
     
   )
