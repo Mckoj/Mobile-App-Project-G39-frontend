@@ -6,7 +6,7 @@ import Header from 'app/screenComponents/Header'
 const Notifications = () => {
   return (
     <View>  
-      <Header/>
+      <Header title = 'Notifications'/>
       <Text>Notifications</Text>
     </View>
   )
