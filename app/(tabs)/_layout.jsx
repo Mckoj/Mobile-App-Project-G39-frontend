@@ -1,8 +1,11 @@
 // app/tabs/_layout.tsx
 import { Tabs } from 'expo-router';
 import { Ionicons,MaterialIcons,AntDesign,Octicons ,Feather,FontAwesome} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function TabsLayout() {
+  const navigation = useNavigation();
   return (
     <Tabs
       screenOptions={({ route }) => ({

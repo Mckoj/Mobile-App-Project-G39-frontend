@@ -22,6 +22,7 @@ const generateMockPosts = (count, offset = 0) => {
     },
     question: `Question #${offset + i}: What is the meaning of life?`,
     content: `The meaning of life can vary from person to person. Some believe it's about happiness, others about purpose...`,
+    postImage: ""
   }));
 };
 

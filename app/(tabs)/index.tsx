@@ -1,18 +1,25 @@
 import "../../global"
-import { Text } from 'react-native'
+import { Text, View , StyleSheet} from 'react-native'
 import Header from '../screenComponents/Header'
-import Feed from '../screenComponents/Feed'
+import Mockfeed from '../screenComponents/Mockfeed'
+import { useNavigation } from "expo-router"
 
 
 const Index = () => {
+  const navigation= useNavigation();
   return (
-    <>
-    <Header title="Home"/>
-    <Feed/>
+    <View style= {styles.container}>
+      <Header title="Home" navigation={navigation} />
+      <Mockfeed/>
     
-    </>
+    </View >
     
   )
 }
 
 export default Index
+const styles = StyleSheet.create({
+  container:{
+    flex:1
+  }
+})

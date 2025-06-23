@@ -2,6 +2,7 @@ import { Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput
 import React from 'react'
 import { SearchBar } from 'react-native-screens'
 import "../../global"
+import { Ionicons, MaterialCommunityIcons, Feather, FontAwesome } from '@expo/vector-icons';
 // import * as Icons from "react-native-heroicons"
 
 const FeedScreen = () => {
@@ -18,18 +19,18 @@ const FeedScreen = () => {
 
                 {/*bottom icons */}
                 <View style ={styles.actionRow}>
-                    <TouchableOpacity >
-                        <Image />
+                        <TouchableOpacity  style ={styles.action} >
+                        <MaterialCommunityIcons name="comment-question-outline" size={20} color="#8395a7" />
                         <Text>Ask</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style= {styles.action}>
-                        <Image/>
+                        <FontAwesome name="pencil-square-o" size={24} color="#8395a7" />
                         <Text className='text-red-500'>Answer</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity >
-                        <Image/>
+                    <TouchableOpacity style= {styles.action} >
+                        <MaterialCommunityIcons name="pencil" size={20} color="#8395a7" />
                         <Text>Post</Text>
                     </TouchableOpacity>
                 </View>
@@ -44,6 +45,7 @@ const FeedScreen = () => {
                             <Text style = {styles.textDig}>Your Weekly Digest</Text>
                             <Text></Text>
                         </View>
+                        
                         <Text>Post</Text>
                     </View>
 
@@ -95,11 +97,15 @@ const styles = StyleSheet.create({
     actionRow: {
         flexDirection: 'row',
         top:10,
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        
     },
     action:{
-        borderEndWidth:1,
+        // border:1,
         justifyContent:'center',
+        flexDirection:"row",
+        paddingHorizontal: 1
+
         
     },
     Digest:{
@@ -108,7 +114,8 @@ const styles = StyleSheet.create({
     textDig:{
         fontWeight:"700",
         fontSize: 16,
-        textAlign: "center"
+        textAlign: "center",
+        top:10
 
 
     }
