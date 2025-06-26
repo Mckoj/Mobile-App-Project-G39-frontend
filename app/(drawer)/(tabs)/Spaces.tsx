@@ -1,6 +1,6 @@
 // import { View, Text , Image} from 'react-native'
 // import React from 'react'
-// import Header from 'app/screenComponents/Header'
+import Header from 'app/screenComponents/Header'
 
 // const Spaces = () => {
 //   return (
@@ -59,6 +59,8 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import { useNavigation } from 'expo-router';
+import SpaceCad from "app/screenComponents/SpaceCad"
 
 type Space = {
   id: string;
@@ -101,6 +103,7 @@ const mockSpaces: Space[] = [
 
 export default function SpacesScreen() {
   const [spaces, setSpaces] = useState(mockSpaces);
+  const navigation = useNavigation()
 
   const toggleJoin = (id: string) => {
     setSpaces(prev =>
@@ -111,25 +114,116 @@ export default function SpacesScreen() {
   };
 
   return (
-    <View style={styles.container}>
+     <>
+    <Header title='Spaces' navigation={navigation}/>
+    <ScrollView style={styles.container}>
       <Text style={styles.heading}>Explore Spaces</Text>
+
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
         {spaces.map(space => (
-          <View key={space.id} style={styles.card}>
-            <Image source={{ uri: space.image }} style={styles.cardImage} />
-            <Text style={styles.spaceName}>{space.name}</Text>
-            <Text style={styles.members}>{space.members.toLocaleString()} members</Text>
-            <TouchableOpacity
-              style={[styles.joinButton, space.joined && styles.joined]}
-              onPress={() => toggleJoin(space.id)}
-            >
-              <Text style={[styles.joinText, space.joined && styles.joinedText]}>
-                {space.joined ? 'Joined' : 'Join'}
-              </Text>
-            </TouchableOpacity>
-          </View>
+          
+          <>
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          </>
         ))}
       </ScrollView>
+
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+        {spaces.map(space => (
+         
+          <>
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          </>
+        ))}
+      </ScrollView>
+
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+        {spaces.map(space => (
+          
+          <>
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          <SpaceCad
+            key={space.id}
+            id={space.id}
+            name={space.name}
+            image={space.image}
+            members={space.members}
+            joined={space.joined}
+            onToggleJoin={toggleJoin}
+          />
+          </>
+        ))}
+      </ScrollView>
+      
 
       {/* Optional: You can show a list of space content below */}
       {/* <FlatList
@@ -139,7 +233,8 @@ export default function SpacesScreen() {
         )}
         keyExtractor={(item) => item.id}
       /> */}
-    </View>
+    </ScrollView>
+     </> 
   );
 }
 
@@ -157,9 +252,15 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     paddingLeft: 16,
+    marginTop :20, 
+    height: 280,
+    backgroundColor: "#10ac84",
+    paddingVertical: 10,
+
   },
   card: {
     width: 180,
+    
     marginRight: 16,
     borderRadius: 12,
     backgroundColor: '#f8f9fa',
@@ -169,6 +270,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
+    backgroundColor: "#10ac84"
+    
   },
   cardImage: {
     width: '100%',

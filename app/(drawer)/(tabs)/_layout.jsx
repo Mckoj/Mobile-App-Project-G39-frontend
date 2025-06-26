@@ -13,7 +13,7 @@ export default function TabsLayout() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'index') {
+          if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Following') {
             iconName = focused ? 'newspaper' : 'newspaper-outline';
@@ -35,7 +35,7 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tabs.Screen name ="index"/>
+      <Tabs.Screen name ="Home"/>
       <Tabs.Screen name ="Following"/>
       <Tabs.Screen name ="Answer"/>
       <Tabs.Screen name ="Spaces"/>
