@@ -9,10 +9,10 @@
 //   ActivityIndicator,
 // } from 'react-native';
 // import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { auth } from '../firebase';
+// import { auth } from '../config/Firebase';
 // import { useNavigation } from '@react-navigation/native';
 
-// const RegisterScreen: React.FC = () => {
+// const RegisterScreen = () => {
 //   const [email, setEmail] = useState('');
 //   const [password, setPassword] = useState('');
 //   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@
 //       await createUserWithEmailAndPassword(auth, email, password);
 //       Alert.alert('Success', 'Account created successfully');
 //       navigation.navigate('Login');
-//     } catch (error: any) {
+//     } catch (error) {
 //       Alert.alert('Registration Failed', error.message);
 //     } finally {
 //       setLoading(false);

@@ -1,7 +1,7 @@
-import "../../../global"
+import "../../../../global"
 import { Text, View , StyleSheet} from 'react-native'
-import Header from '../../screenComponents/Header'
-import Mockfeed from '../../screenComponents/Mockfeed'
+import Header from '../../../screenComponents/Header'
+import Mockfeed from '../../../screenComponents/Mockfeed'
 import { useNavigation } from "expo-router"
 
 

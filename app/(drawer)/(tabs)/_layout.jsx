@@ -2,6 +2,7 @@
 import { Tabs } from 'expo-router';
 import { Ionicons,MaterialIcons,AntDesign,Octicons ,Feather,FontAwesome} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 
 
 export default function TabsLayout() {
@@ -10,32 +11,44 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'Home/Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Following') {
+          } else if (route.name === 'Following/Following') {
             iconName = focused ? 'newspaper' : 'newspaper-outline';
           }
-           else if (route.name === 'Spaces') {
+           else if (route.name === 'Spaces/Spaces') {
            iconName = focused ? "people-circle" : 'people-circle-outline';
           
-          } else if (route.name ==='Answer') {
+          } else if (route.name ==='Answer/Answer') {
             iconName = focused ? 'pencil-square': 'pencil-square-o';
             return <FontAwesome name={iconName} size={size} color={color} />
           
-          } else if (route.name === 'Notifications') {
+          } else if (route.name === 'Notifications/Notifications') {
             iconName = focused ? "notifications-sharp" : "notifications-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
+           
         },
-        tabBarActiveTintColor: '#2f95dc',
+        tabBarStyle: {backgroundColor: "#ecf0f1",
+          paddingTop: 15,
+          
+        },
+        tabBarActiveTintColor: '#2f59dc',
         tabBarInactiveTintColor: 'gray',
+        paddingVertical: 10
+        
+        
+        
       })}
     >
-      <Tabs.Screen name ="Home"/>
+      <Tabs.Screen name ="Home" options={{
+        title: "Home"
+      }}/>
       <Tabs.Screen name ="Following"/>
       <Tabs.Screen name ="Answer"/>
       <Tabs.Screen name ="Spaces"/>

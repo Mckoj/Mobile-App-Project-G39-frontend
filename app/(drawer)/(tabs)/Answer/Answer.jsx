@@ -6,9 +6,9 @@ import Header from 'app/screenComponents/Header'
 const Answer = () => {
 
   return (
-    <View>
+    <View className='bg-red-500'>
       <Header title='Answer'/>
-      <Text>Answer</Text>
+      <Text className='text-red-500'>Answer</Text>
     </View>
   )
 }

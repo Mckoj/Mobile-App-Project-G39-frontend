@@ -37,6 +37,7 @@ interface Post {
   createdAt: string;
 }
 
+
 // Mock data - Ready to use!
 const mockPosts: Post[] = [
   {
@@ -176,7 +177,7 @@ const mockPosts: Post[] = [
 ];
 
 const Mockfeed: React.FC = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);

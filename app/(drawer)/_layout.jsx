@@ -16,10 +16,12 @@
 
 import { Drawer } from 'expo-router/drawer';
 import { Ionicons, MaterialIcons,SimpleLineIcons } from '@expo/vector-icons';
-
+import CustomDrawerContent from 'app/screenComponents/CustomDrawerContent';
 export default function DrawerLayout() {
   return (
-    <Drawer screenOptions={
+    <Drawer
+       drawerContent={(props) => <CustomDrawerContent {...props} />} 
+      screenOptions={
       { headerShown: false,
         drawerType: "back",
         overlayColor: "#rgba(184, 135, 93, 0.4)",
@@ -44,22 +46,19 @@ export default function DrawerLayout() {
         }
       
       } />
-      <Drawer.Screen name="Profile" 
+      <Drawer.Screen name="Profile/Profile" 
       options={{ drawerLabel: 'Profile',
         drawerIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
        }} />
-      <Drawer.Screen name="Settings"
+      <Drawer.Screen name="Settings/Settings"
        options={{ drawerLabel: 'Settings',
         drawerIcon: ({ color, size }) => <Ionicons name="settings-outline" size={size} color={color} />,
         }} />
-      <Drawer.Screen name="Help"
+      <Drawer.Screen name="Help/Help"
        options={{ drawerLabel: 'Help',
         drawerIcon: ({ color, size }) =>  <MaterialIcons name="help-outline" size={size} color={color} />,
         }} />
-      <Drawer.Screen name="Logout"
-       options={{ drawerLabel: 'Log Out',
-        drawerIcon: ({ color, size }) =>  <SimpleLineIcons name="logout" size={24} color="black" />,
-        }} />
+      
     </Drawer>
   );
 }

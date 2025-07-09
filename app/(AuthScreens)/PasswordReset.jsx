@@ -10,10 +10,10 @@
 //   ActivityIndicator,
 // } from 'react-native';
 // import { sendPasswordResetEmail } from 'firebase/auth';
-// import { auth } from '../firebase'; // Make sure this points to your Firebase config file
+// import { auth} from '../config/Firebase'; // Make sure this points to your Firebase config file
 // import { useNavigation } from '@react-navigation/native';
 
-// const PasswordResetScreen: React.FC = () => {
+// const PasswordResetScreen = () => {
 //   const [email, setEmail] = useState('');
 //   const [loading, setLoading] = useState(false);
 //   const navigation = useNavigation();
@@ -38,7 +38,7 @@
 //           },
 //         ]
 //       );
-//     } catch (error: any) {
+//     } catch (error) {
 //       Alert.alert('Error', error.message);
 //     } finally {
 //       setLoading(false);

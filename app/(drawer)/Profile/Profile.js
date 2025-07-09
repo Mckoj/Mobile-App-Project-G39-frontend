@@ -3,10 +3,11 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import handleLogout from "../../utils/authHelp"
+
 
 export default function ProfileScreen() {
-  const router = useRouter();  // For navigation if needed (like Edit Profile or Logout actions)
-
+  const router = useRouter();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* -------- User Avatar -------- */}
@@ -51,7 +52,7 @@ export default function ProfileScreen() {
 
         <TouchableOpacity
           style={[styles.actionButton, { backgroundColor: '#FF3B30' }]}
-          onPress={() => console.log('Logout pressed')}  // Later: Replace with real logout logic
+          onPress={handleLogout}  // Later: Replace with real logout logic
         >
           <Ionicons name="log-out-outline" size={20} color="#fff" />
           <Text style={[styles.actionText, { color: '#fff' }]}>Logout</Text>
