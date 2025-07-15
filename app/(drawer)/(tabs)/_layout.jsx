@@ -15,19 +15,19 @@ export default function TabsLayout() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Home/Home') {
+          if (route.name === 'Home/Index') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Following/Following') {
+          } else if (route.name === 'Following/Index') {
             iconName = focused ? 'newspaper' : 'newspaper-outline';
           }
-           else if (route.name === 'Spaces/Spaces') {
+           else if (route.name === 'Spaces/Index') {
            iconName = focused ? "people-circle" : 'people-circle-outline';
           
-          } else if (route.name ==='Answer/Answer') {
+          } else if (route.name ==='Answer/Index') {
             iconName = focused ? 'pencil-square': 'pencil-square-o';
             return <FontAwesome name={iconName} size={size} color={color} />
           
-          } else if (route.name === 'Notifications/Notifications') {
+          } else if (route.name === 'Notifications/Index') {
             iconName = focused ? "notifications-sharp" : "notifications-outline";
           }
 

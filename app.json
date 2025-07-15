@@ -2,7 +2,9 @@
   "expo": {
     "name": "Bisa",
     "slug": "my-expo-app",
+    "scheme": "bisa",
     "version": "1.0.0",
+
     
     "web": {
       "favicon": "./assets/QuoraR.jpeg"

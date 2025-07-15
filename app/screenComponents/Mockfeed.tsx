@@ -10,9 +10,13 @@ import {
   RefreshControl,
   ActivityIndicator,
   Alert,
+  TextInput,
+  Button,
+  Modal
 } from 'react-native';
 import { Video } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
+import ReadMore from 'react-native-read-more-text';
 import FeedScreen from './FeedScreen';
 
 // Types
@@ -176,39 +180,231 @@ const mockPosts: Post[] = [
   }
 ];
 
+// const Mockfeed: React.FC = () => {
+//   const [posts, setPosts] = useState<Post[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [refreshing, setRefreshing] = useState(false);
+//   const [loadingMore, setLoadingMore] = useState(false);
+
+//   // Simulate API loading
+//   const loadPosts = useCallback(async (isRefresh: boolean = false) => {
+//     if (isRefresh) {
+//       setRefreshing(true);
+//     } else {
+//       setLoadingMore(true);
+//     }
+
+//     // Simulate network delay
+//     await new Promise(resolve => setTimeout(resolve, 1000));
+
+//     if (isRefresh) {
+//       setPosts(mockPosts);
+//       setRefreshing(false);
+//     } else {
+//       // Simulate pagination by adding more posts
+//       const morePosts = mockPosts.map(post => ({
+//         ...post,
+//         id: post.id + '_' + Date.now(),
+//         createdAt: new Date(Date.now() - Math.random() * 86400000).toISOString()
+//       }));
+//       setPosts(prev => [...prev, ...morePosts]);
+//       setLoadingMore(false);
+//     }
+//   }, []);
+
+//   // Initial load
+//   useEffect(() => {
+//     const initialLoad = async () => {
+//       setLoading(true);
+//       await loadPosts(true);
+//       setLoading(false);
+//     };
+//     initialLoad();
+//   }, [loadPosts]);
+
+//   // Handle upvote with animation
+//   const handleUpvote = (postId: string) => {
+//     setPosts(prev =>
+//       prev.map(post =>
+//         post.id === postId
+//           ? {
+//               ...post,
+//               isUpvoted: !post.isUpvoted,
+//               upvotes: post.isUpvoted ? post.upvotes - 1 : post.upvotes + 1,
+//             }
+//           : post
+//       )
+//     );
+//   };
+
+//   // Handle other actions (mock)
+//   const handleComment = (postId: string) => {
+//     Alert.alert('Comments', `Open comments for post ${postId}`);
+//   };
+
+//   const handleShare = (postId: string) => {
+//     Alert.alert('Share', `Share post ${postId}`);
+//   };
+
+//   const handleFollow = (userId: string) => {
+//     Alert.alert('Follow', `Follow user ${userId}`);
+//   };
+
+//   // Format time
+//   const formatTime = (dateString: string) => {
+//     const date = new Date(dateString);
+//     const now = new Date();
+//     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+
+//     if (diffInHours < 1) return 'Just now';
+//     if (diffInHours < 24) return `${diffInHours}h ago`;
+//     if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
+//     return date.toLocaleDateString();
+//   };
+
+//   // Render post item
+//   const renderPost = ({ item }: { item: Post }) => (
+//     <View style={styles.postContainer}>
+//       {/* User Info */}
+//       <View style={styles.userInfo}>
+//         <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
+//         <View style={styles.userDetails}>
+//           <Text style={styles.userName}>{item.user.name}</Text>
+//           {item.user.credentials && (
+//             <Text style={styles.userCredentials}>{item.user.credentials}</Text>
+//           )}
+//           <Text style={styles.timestamp}>{formatTime(item.createdAt)}</Text>
+//         </View>
+//         <TouchableOpacity 
+//           style={styles.followButton}
+//           onPress={() => handleFollow(item.user.id)}
+//         >
+//           <Text style={styles.followButtonText}>Follow</Text>
+//         </TouchableOpacity>
+//       </View>
+
+//       {/* Question */}
+//       <Text style={styles.question}>{item.question}</Text>
+
+//       {/* Answer */}
+//       <Text style={styles.answer}>{item.answer}</Text>
+
+//       {/* Media */}
+//       {item.mediaUrl && (
+//         <View style={styles.mediaContainer}>
+//           <Image source={{ uri: item.mediaUrl }} style={styles.postImage} />
+//         </View>
+//       )}
+
+//       {/* Actions */}
+//       <View style={styles.actionsContainer}>
+//         <TouchableOpacity
+//           style={[styles.actionButton, item.isUpvoted && styles.upvotedButton]}
+//           onPress={() => handleUpvote(item.id)}
+//         >
+//           <Ionicons
+//             name={item.isUpvoted ? 'arrow-up' : 'arrow-up-outline'}
+//             size={20}
+//             color={item.isUpvoted ? '#FF6B35' : '#666'}
+//           />
+//           <Text style={[styles.actionText, item.isUpvoted && styles.upvotedText]}>
+//             {item.upvotes}
+//           </Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity
+//           style={styles.actionButton}
+//           onPress={() => handleComment(item.id)}
+//         >
+//           <Ionicons name="chatbubble-outline" size={20} color="#666" />
+//           <Text style={styles.actionText}>{item.comments}</Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity
+//           style={styles.actionButton}
+//           onPress={() => handleShare(item.id)}
+//         >
+//           <Ionicons name="share-outline" size={20} color="#666" />
+//           <Text style={styles.actionText}>{item.shares}</Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity style={styles.actionButton}>
+//           <Ionicons name="bookmark-outline" size={20} color="#666" />
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   );
+
+//   // Loading state
+//   if (loading) {
+//     return (
+//       <View style={styles.loadingContainer}>
+//         <ActivityIndicator size="large" color="#007AFF" />
+//         <Text style={styles.loadingText}>Loading posts...</Text>
+//       </View>
+//     );
+//   }
+
+//   // Footer loader
+//   const renderFooter = () => {
+//     if (!loadingMore) return null;
+//     return (
+//       <View style={styles.footerLoader}>
+//         <ActivityIndicator size="small" color="#007AFF" />
+//         <Text style={styles.loadingMoreText}>Loading more posts...</Text>
+//       </View>
+//     );
+//   };
+// console.log("Rendering feed...");
+//   return (
+//     <View style={styles.container}>
+//       <FlatList
+//         data={posts}
+//         keyExtractor={(item) => item.id}
+//         renderItem={renderPost}
+//         ListHeaderComponent={<FeedScreen />} 
+//         refreshControl={
+//           <RefreshControl refreshing={refreshing} onRefresh={() => loadPosts(true)} />
+//         }
+//         onEndReached={() => loadPosts(false)}
+//         onEndReachedThreshold={0.1}
+//         ListFooterComponent={renderFooter}
+//         showsVerticalScrollIndicator={false}
+//       />
+//     </View>
+//   );
+// };
+
 const Mockfeed: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [commentText, setCommentText] = useState('');
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
 
-  // Simulate API loading
   const loadPosts = useCallback(async (isRefresh: boolean = false) => {
-    if (isRefresh) {
-      setRefreshing(true);
-    } else {
-      setLoadingMore(true);
-    }
+    if (isRefresh) setRefreshing(true);
+    else setLoadingMore(true);
 
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     if (isRefresh) {
       setPosts(mockPosts);
       setRefreshing(false);
     } else {
-      // Simulate pagination by adding more posts
-      const morePosts = mockPosts.map(post => ({
+      const morePosts = mockPosts.map((post) => ({
         ...post,
         id: post.id + '_' + Date.now(),
-        createdAt: new Date(Date.now() - Math.random() * 86400000).toISOString()
+        createdAt: new Date(Date.now() - Math.random() * 86400000).toISOString(),
       }));
-      setPosts(prev => [...prev, ...morePosts]);
+      setPosts((prev) => [...prev, ...morePosts]);
       setLoadingMore(false);
     }
   }, []);
 
-  // Initial load
   useEffect(() => {
     const initialLoad = async () => {
       setLoading(true);
@@ -218,10 +414,9 @@ const Mockfeed: React.FC = () => {
     initialLoad();
   }, [loadPosts]);
 
-  // Handle upvote with animation
   const handleUpvote = (postId: string) => {
-    setPosts(prev =>
-      prev.map(post =>
+    setPosts((prev) =>
+      prev.map((post) =>
         post.id === postId
           ? {
               ...post,
@@ -233,9 +428,14 @@ const Mockfeed: React.FC = () => {
     );
   };
 
-  // Handle other actions (mock)
   const handleComment = (postId: string) => {
-    Alert.alert('Comments', `Open comments for post ${postId}`);
+    setSelectedPostId(postId);
+    setIsCommentModalVisible(true);
+  };
+
+  const handleFactCheck = (postId: string) => {
+    Alert.alert('Fact Check', `Trigger fact-check on post ${postId}`);
+    // TODO: Add API call here
   };
 
   const handleShare = (postId: string) => {
@@ -246,82 +446,71 @@ const Mockfeed: React.FC = () => {
     Alert.alert('Follow', `Follow user ${userId}`);
   };
 
-  // Format time
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-
     if (diffInHours < 1) return 'Just now';
     if (diffInHours < 24) return `${diffInHours}h ago`;
     if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
     return date.toLocaleDateString();
   };
 
-  // Render post item
   const renderPost = ({ item }: { item: Post }) => (
     <View style={styles.postContainer}>
-      {/* User Info */}
       <View style={styles.userInfo}>
         <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
         <View style={styles.userDetails}>
           <Text style={styles.userName}>{item.user.name}</Text>
-          {item.user.credentials && (
-            <Text style={styles.userCredentials}>{item.user.credentials}</Text>
-          )}
+          {item.user.credentials && <Text style={styles.userCredentials}>{item.user.credentials}</Text>}
           <Text style={styles.timestamp}>{formatTime(item.createdAt)}</Text>
         </View>
-        <TouchableOpacity 
-          style={styles.followButton}
-          onPress={() => handleFollow(item.user.id)}
-        >
+        <TouchableOpacity style={styles.followButton} onPress={() => handleFollow(item.user.id)}>
           <Text style={styles.followButtonText}>Follow</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Question */}
       <Text style={styles.question}>{item.question}</Text>
 
-      {/* Answer */}
-      <Text style={styles.answer}>{item.answer}</Text>
+      <ReadMore
+        numberOfLines={3}
+        renderTruncatedFooter={(handlePress:any) => (
+          <Text style={{ color: '#007AFF', marginTop: 4 }} onPress={handlePress}>Read More</Text>
+        )}
+        renderRevealedFooter={(handlePress: any) => (
+          <Text style={{ color: '#007AFF', marginTop: 4 }} onPress={handlePress}>Show Less</Text>
+        )}
+      >
+        <Text style={styles.answer}>{item.answer}</Text>
+      </ReadMore>
 
-      {/* Media */}
       {item.mediaUrl && (
         <View style={styles.mediaContainer}>
           <Image source={{ uri: item.mediaUrl }} style={styles.postImage} />
         </View>
       )}
 
-      {/* Actions */}
       <View style={styles.actionsContainer}>
         <TouchableOpacity
           style={[styles.actionButton, item.isUpvoted && styles.upvotedButton]}
           onPress={() => handleUpvote(item.id)}
         >
-          <Ionicons
-            name={item.isUpvoted ? 'arrow-up' : 'arrow-up-outline'}
-            size={20}
-            color={item.isUpvoted ? '#FF6B35' : '#666'}
-          />
-          <Text style={[styles.actionText, item.isUpvoted && styles.upvotedText]}>
-            {item.upvotes}
-          </Text>
+          <Ionicons name={item.isUpvoted ? 'arrow-up' : 'arrow-up-outline'} size={20} color={item.isUpvoted ? '#FF6B35' : '#666'} />
+          <Text style={[styles.actionText, item.isUpvoted && styles.upvotedText]}>{item.upvotes}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => handleComment(item.id)}
-        >
+        <TouchableOpacity style={styles.actionButton} onPress={() => handleComment(item.id)}>
           <Ionicons name="chatbubble-outline" size={20} color="#666" />
           <Text style={styles.actionText}>{item.comments}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => handleShare(item.id)}
-        >
+        <TouchableOpacity style={styles.actionButton} onPress={() => handleShare(item.id)}>
           <Ionicons name="share-outline" size={20} color="#666" />
           <Text style={styles.actionText}>{item.shares}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.actionButton} onPress={() => handleFactCheck(item.id)}>
+          <Ionicons name="alert-circle-outline" size={20} color="#666" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionButton}>
@@ -331,17 +520,6 @@ const Mockfeed: React.FC = () => {
     </View>
   );
 
-  // Loading state
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
-        <Text style={styles.loadingText}>Loading posts...</Text>
-      </View>
-    );
-  }
-
-  // Footer loader
   const renderFooter = () => {
     if (!loadingMore) return null;
     return (
@@ -351,25 +529,62 @@ const Mockfeed: React.FC = () => {
       </View>
     );
   };
-console.log("Rendering feed...");
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007AFF" />
+        <Text style={styles.loadingText}>Loading posts...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
         data={posts}
         keyExtractor={(item) => item.id}
         renderItem={renderPost}
-        ListHeaderComponent={<FeedScreen />} 
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={() => loadPosts(true)} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => loadPosts(true)} />}
         onEndReached={() => loadPosts(false)}
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}
         showsVerticalScrollIndicator={false}
       />
+
+      <Modal visible={isCommentModalVisible} animationType="slide" onRequestClose={() => setIsCommentModalVisible(false)}>
+        <View style={{ flex: 1, padding: 20, backgroundColor: '#fff' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+            Comments for Post {selectedPostId}
+          </Text>
+
+          {/* TODO: Fetch and display real comments from API */}
+
+          <TextInput
+            placeholder="Write a comment..."
+            value={commentText}
+            onChangeText={setCommentText}
+            style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 8, marginBottom: 10 }}
+          />
+          <Button
+            title="Post Comment"
+            onPress={() => {
+              if (selectedPostId) {
+                console.log('Post comment to backend:', commentText);
+                // TODO: Send comment to API
+              }
+              setCommentText('');
+              setIsCommentModalVisible(false);
+            }}
+          />
+          <Button title="Close" onPress={() => setIsCommentModalVisible(false)} />
+        </View>
+      </Modal>
     </View>
   );
 };
+
+// ... (keep your styles from original)
 
 const styles = StyleSheet.create({
   container: {

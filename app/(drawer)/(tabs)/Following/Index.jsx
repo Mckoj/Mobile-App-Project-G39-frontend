@@ -6,7 +6,7 @@ const Following = () => {
   return (
     <View style = {{flex:1}}>
       <Header title = 'Following'/>
-       <LoginScreen/>
+       
 
     </View>
   )
