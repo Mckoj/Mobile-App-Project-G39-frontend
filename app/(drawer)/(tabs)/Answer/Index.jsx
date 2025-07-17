@@ -54,8 +54,10 @@ const AnswerScreen = () => {
   );
 
   return (
+    <>
+      
+    <Header/>
     <SafeAreaView style={styles.container}>
-      <Header/>
       <View style={styles.questionBox}>
         <Text style={styles.questionText}>{dummyQuestion.title}</Text>
       </View>
@@ -81,6 +83,7 @@ const AnswerScreen = () => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    </>
   );
 };
 

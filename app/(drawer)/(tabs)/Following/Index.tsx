@@ -106,8 +106,9 @@ const Following = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <>
       <Header title = 'Following' navigation = {navigation}/>
+    <View style={styles.container}>
       
 
       {loading ? (
@@ -123,6 +124,7 @@ const Following = () => {
         />
       )}
     </View>
+    </>
   );
 };
 
