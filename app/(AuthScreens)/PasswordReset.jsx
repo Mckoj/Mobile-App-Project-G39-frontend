@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth} from '../config/Firebase'; // Make sure this points to your Firebase config file
+import { auth} from '../config/Firebase'; 
 import { useNavigation } from '@react-navigation/native';
 
 const PasswordResetScreen = () => {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#28a745',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',

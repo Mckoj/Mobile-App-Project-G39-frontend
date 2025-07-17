@@ -59,75 +59,88 @@ const Login = () => {
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       {/* HEADER */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Quora</Text>
+      <Text style={styles.headerText}>Bisa</Text>
       </View>
 
       {/* INPUT SECTION */}
       <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Email..."
-          value={email}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onChangeText={setEmail}
-          style={styles.inputText}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          style={[styles.inputText, isFocused && styles.inputFocused]}
-        />
+      <TextInput
+        placeholder="Email..."
+        value={email}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onChangeText={setEmail}
+        style={styles.inputText}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={[styles.inputText, isFocused && styles.inputFocused]}
+      />
 
-        {/* BUTTONS */}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleSignIn}
-            disabled={loading}
+      {/* BUTTONS */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+        style={styles.button}
+        onPress={handleSignIn}
+        disabled={loading}
+        >
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonTextLight}>Login</Text>
+        )}
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        style={[styles.button, styles.buttonOutline]}
+        onPress={() => router.push("./../(AuthScreens)/PasswordReset")}
+        disabled={loading}
+        >
+        <Text style={{ color: "#3498db", fontWeight: "bold" }}>
+          Forgot Password?
+        </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        style={[styles.button, styles.buttonOutline]}
+        onPress={() => router.push("./../(AuthScreens)/RegisterScreen")}
+        disabled={loading}
+        >
+        <Text style={styles.buttonTextOutline}>Create an account</Text>
+        </TouchableOpacity>
+
+        <View style={styles.buttonContainerLogo}>
+        <TouchableOpacity style={styles.buttonLogo} 
+          onPress={() => Alert.alert("Feature coming soon!")} disabled={loading}
           >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonTextLight}>Login</Text>
-            )}
-          </TouchableOpacity>
+          <Image
+          source={require("../../assets/_Google.jpeg")}
+          style={styles.icon}
+          />
+          <Text style={styles.buttonTextLight}>Login with Google</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.button, styles.buttonOutline]}
-            onPress={handleSignUp}
-            disabled={loading}
-          >
-            <Text style={styles.buttonTextOutline}>Register</Text>
-          </TouchableOpacity>
-
-          <View style={styles.buttonContainerLogo}>
-            <TouchableOpacity style={styles.buttonLogo} disabled>
-              <Image
-                source={require("../../assets/_Google.jpeg")}
-                style={styles.icon}
-              />
-              <Text style={styles.buttonTextLight}>Login with Google</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.buttonLogo, styles.buttonOutline]}
-              disabled
-            >
-              <Image
-                source={require("../../assets/facebook.jpeg")}
-                style={styles.icon}
-              />
-              <Text style={styles.buttonTextOutline}>Login with Facebook</Text>
-            </TouchableOpacity>
-          </View>
+        <TouchableOpacity
+          style={[styles.buttonLogo, styles.buttonOutline]}
+          onPress={() => Alert.alert("Feature coming soon!")}
+          disabled={loading}  
+        >
+          <Image
+          source={require("../../assets/facebook.jpeg")}
+          style={styles.icon}
+          />
+          <Text style={styles.buttonTextOutline}>Login with Facebook</Text>
+        </TouchableOpacity>
         </View>
       </View>
+      </View>
     </KeyboardAvoidingView>
-  );
+    );
 };
 
 export default Login;
@@ -141,7 +154,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   header: {
-    backgroundColor: '#ff4757',
+    backgroundColor: '#28a745',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
