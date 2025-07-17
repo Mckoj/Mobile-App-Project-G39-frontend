@@ -69,8 +69,8 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBar.currentHeight || 20,
-    backgroundColor: '#1dd1a1'
+    paddingTop: StatusBar.currentHeight || 20,
+    backgroundColor: '#758682ff'
   },
   headerContainer: {
     position: 'static',

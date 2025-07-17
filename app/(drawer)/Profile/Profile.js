@@ -1,18 +1,47 @@
-// app/(drawer)/profile.tsx
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  StatusBar
+} from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import handleLogout from "../../utils/authHelp"
-
+import handleLogout from '../../utils/authHelp';
 
 export default function ProfileScreen() {
   const router = useRouter();
+
+  const handleChangePassword = () => {
+    // 🔗 Integrate your Spring Boot change password API here
+    alert('Change Password triggered');
+  };
+
+  const handleFollowers = () => {
+    // 🔗 Navigate or call backend API to fetch followers
+    alert('Followers screen');
+  };
+
+  const handleFollowing = () => {
+    // 🔗 Navigate or call backend API to fetch following list
+    alert('Following screen');
+  };
+
+  const handlePosts = () => {
+    // 🔗 Navigate or fetch posts by user
+    alert('User posts');
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#f2f2f2" />
+
       {/* -------- User Avatar -------- */}
       <Image
-        source={{ uri: 'https://your-avatar-url.com/avatar.jpg' }}  // Placeholder Avatar Image
+        source={{ uri: 'https://your-avatar-url.com/avatar.jpg' }}
         style={styles.avatar}
       />
 
@@ -26,70 +55,83 @@ export default function ProfileScreen() {
 
       {/* -------- User Stats (Posts, Followers, Following) -------- */}
       <View style={styles.statsContainer}>
-        <View style={styles.statItem}>
+        <TouchableOpacity style={styles.statItem} onPress={handlePosts}>
           <Text style={styles.statNumber}>120</Text>
           <Text style={styles.statLabel}>Posts</Text>
-        </View>
-        <View style={styles.statItem}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.statItem} onPress={handleFollowers}>
           <Text style={styles.statNumber}>5.2k</Text>
           <Text style={styles.statLabel}>Followers</Text>
-        </View>
-        <View style={styles.statItem}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.statItem} onPress={handleFollowing}>
           <Text style={styles.statNumber}>300</Text>
           <Text style={styles.statLabel}>Following</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
-      {/* -------- Action Buttons -------- */}
+      {/* -------- Buttons -------- */}
       <View style={styles.actionsContainer}>
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => router.push('/modals/EditProfile')}  // Assuming you create an edit profile modal later
+          onPress={() => router.push('/modals/EditProfile')}
         >
           <Ionicons name="pencil-outline" size={20} color="#007AFF" />
           <Text style={styles.actionText}>Edit Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.actionButton, { backgroundColor: '#FF3B30' }]}
-          onPress={handleLogout}  // Later: Replace with real logout logic
+          style={styles.actionButton}
+          onPress={handleChangePassword}
         >
-          <Ionicons name="log-out-outline" size={20} color="#fff" />
+          <Ionicons name="key-outline" size={20} color="#007AFF" />
+          <Text style={styles.actionText}>Change Password</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.actionButton, styles.logoutButton]}
+          onPress={handleLogout}
+        >
+          <MaterialCommunityIcons name="logout" size={20} color="#fff" />
           <Text style={[styles.actionText, { color: '#fff' }]}>Logout</Text>
         </TouchableOpacity>
       </View>
-
     </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     padding: 20,
+    paddingTop: StatusBar.currentHeight || 50,
     backgroundColor: '#f9f9f9',
   },
   avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 130,
+    height: 130,
+    borderRadius: 65,
     marginBottom: 15,
+    borderWidth: 3,
+    borderColor: '#007AFF',
   },
   username: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#222',
   },
   bio: {
     fontSize: 14,
     color: '#666',
     textAlign: 'center',
     marginVertical: 10,
+    paddingHorizontal: 20,
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
     marginVertical: 20,
+    paddingHorizontal: 10,
   },
   statItem: {
     alignItems: 'center',
@@ -97,6 +139,7 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
   },
   statLabel: {
     fontSize: 12,
@@ -104,23 +147,28 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     width: '100%',
-    marginTop: 20,
+    marginTop: 10,
+    paddingHorizontal: 10,
   },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#007AFF',
-    marginVertical: 5,
+    marginVertical: 8,
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
   actionText: {
-    marginLeft: 8,
+    marginLeft: 10,
     fontSize: 16,
-    color: '#007AFF',
     fontWeight: '600',
+    color: '#007AFF',
+  },
+  logoutButton: {
+    backgroundColor: '#FF3B30',
+    borderColor: '#FF3B30',
   },
 });

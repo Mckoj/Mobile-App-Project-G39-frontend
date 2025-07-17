@@ -270,13 +270,15 @@ const styles = StyleSheet.create({
   },
   avatarWrapper: {
     marginBottom: 30,
+    position: 'relative'
   },
   avatar: {
     width: 140,
     height: 140,
     borderRadius: 70,
     borderWidth: 2,
-    borderColor: '#eee',
+    borderColor: '#10ac84',
+    borderWidth: 3
   },
   avatarPlaceholder: {
     width: 140,
@@ -285,6 +287,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   uploadText: {
     color: '#666',

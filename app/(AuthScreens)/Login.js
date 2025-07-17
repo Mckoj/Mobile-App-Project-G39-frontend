@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  ScrollView,
   Alert,
   ActivityIndicator,
+  StatusBar
 } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
@@ -56,6 +58,7 @@ const Login = () => {
   };
 
   return (
+      <ScrollView style = {{flex:1}}>
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       {/* HEADER */}
       <View style={styles.header}>
@@ -140,6 +143,7 @@ const Login = () => {
       </View>
       </View>
     </KeyboardAvoidingView>
+   </ScrollView>
     );
 };
 
@@ -152,6 +156,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#dcdde1',
     paddingHorizontal: 20,
+    paddingTop: 5,
+    marginBottom: 60,
+    marginTop: StatusBar.currentHeight || 20
   },
   header: {
     backgroundColor: '#28a745',
