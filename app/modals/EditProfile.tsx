@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderWidth: 2,
     borderColor: '#10ac84',
-    borderWidth: 3
+    backgroundColor: '#f1f1f1',
   },
   avatarPlaceholder: {
     width: 140,
