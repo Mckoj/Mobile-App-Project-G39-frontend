@@ -9,6 +9,7 @@ import {
   SafeAreaView
 } from 'react-native';
 import Header from 'app/screenComponents/Header'
+import { useNavigation } from 'expo-router';
 
 const dummyQuestion = {
   id: 'q1',
@@ -32,6 +33,7 @@ const initialAnswers = [
 const AnswerScreen = () => {
   const [answers, setAnswers] = useState(initialAnswers);
   const [newAnswer, setNewAnswer] = useState('');
+  const navigation = useNavigation
 
   const handleSubmit = () => {
     if (!newAnswer.trim()) return;
@@ -56,7 +58,7 @@ const AnswerScreen = () => {
   return (
     <>
       
-    <Header/>
+    <Header title ='Answer' navigation={navigation}/>
     <SafeAreaView style={styles.container}>
       <View style={styles.questionBox}>
         <Text style={styles.questionText}>{dummyQuestion.title}</Text>

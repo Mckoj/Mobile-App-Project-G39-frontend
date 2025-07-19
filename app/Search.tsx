@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 15,
     backgroundColor: '#fff',
+    marginBottom: 60
   },
   searchBar: {
     flexDirection: 'row',
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
   },
   resultCard: {
     padding: 12,
-    backgroundColor: '#f5f6fa',
+    backgroundColor: '#eeeff4ff',
     borderRadius: 8,
     marginBottom: 8,
   },

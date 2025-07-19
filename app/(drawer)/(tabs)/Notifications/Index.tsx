@@ -1,22 +1,3 @@
-// import { View, Text } from 'react-native'
-// import React from 'react'
-// import Header from 'app/screenComponents/Header'
-// import { useNavigation } from 'expo-router'
-
-// const Notifications = () => {
-//   const navigation = useNavigation()
-//   return (
-//     <View>  
-//       <Header title = 'Notifications' navigation={navigation}/>
-//       <Text>Notifications</Text>
-      
-//     </View>
-//   )
-// }
-
-// export default Notifications
-
-
 import React, { useEffect, useState } from 'react';
 import {
   View,
@@ -116,7 +97,7 @@ const NotificationScreen = () => {
 
   return (
 <>
-    <Header title = 'Notifications' navigation={navigation}/>
+    <Header title = '' navigation={navigation}/>
     <View style={styles.container}>
       <Text style={styles.title}>Notifications</Text>
 
