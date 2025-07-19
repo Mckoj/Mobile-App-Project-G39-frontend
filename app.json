@@ -16,7 +16,7 @@
       "expo-router"
     ],
     "orientation": "portrait",
-    "icon": "./assets/icon1.jpeg",
+    "icon": "./assets/bisa-logo.jpeg",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

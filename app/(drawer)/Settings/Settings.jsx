@@ -118,7 +118,7 @@ export default function SettingsScreen() {
       <View style={styles.section}>
         <TouchableOpacity
           style={styles.logoutButton}
-          onPress={handleLogoutPress}
+          onPress={handleLogout}
           accessibilityLabel="Logout from your account"
         >
           <MaterialCommunityIcons name="logout" size={20} color="white" />

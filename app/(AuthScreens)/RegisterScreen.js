@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../config/Firebase';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,6 +18,7 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [showPassword,setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -56,15 +58,20 @@ const RegisterScreen = () => {
         onChangeText={setUsername}
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#999"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
+      <View style={[styles.passwordContainer, isFocused && styles.inputFocused]}>
+            <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={showPassword}
+              style={styles.passwordInput}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={22} color="#666" />
+            </TouchableOpacity>
+          </View>
 
       <TextInput
         style={styles.input}
@@ -131,6 +138,21 @@ const styles = StyleSheet.create({
     color: '#28a745',
     fontSize: 15,
     marginTop: 10,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
+    marginVertical: 8,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    backgroundColor: '#f5f6fa',
+    borderRadius: 10,
+  },
+  passwordInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#000',
   },
 });
 
