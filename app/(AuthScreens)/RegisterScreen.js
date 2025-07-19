@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateProfile } from 'firebase/auth';
 import {
   View,
   Text,
@@ -15,31 +16,45 @@ import { useNavigation } from '@react-navigation/native';
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
   // Handle registration
   const handleRegister = async () => {
-    if (!email || !password) {
-      Alert.alert('Validation Error', 'Email and Password are required');
-      return;
-    }
+  if (!email || !password || !username) {
+    Alert.alert('Validation Error', 'All fields are required');
+    return;
+  }
 
-    setLoading(true);
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      Alert.alert('Success', 'Account created successfully');
-      navigation.navigate('Login');
-    } catch (error) {
-      Alert.alert('Registration Failed', error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+    await updateProfile(userCredential.user, {
+      displayName: username,
+    });
+
+    Alert.alert('Success', 'Account created successfully');
+    navigation.navigate('Login');
+  } catch (error) {
+    Alert.alert('Registration Failed', error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create an Account</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        placeholderTextColor="#999"
+        value={username}
+        onChangeText={setUsername}
+      />
 
       <TextInput
         style={styles.input}
@@ -60,11 +75,7 @@ const RegisterScreen = () => {
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleRegister}
-        disabled={loading}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
         {loading ? (
           <ActivityIndicator color="#fff" />
         ) : (

@@ -1,22 +1,3 @@
-// import { View, Text } from 'react-native'
-// import React from 'react'
-// import Header from 'app/screenComponents/Header'
-// import { useNavigation } from 'expo-router'
-
-// const Following = () => {
-//   const navigation = useNavigation();
-  
-//   return (
-//     <View style = {{flex:1}}>
-//       <Header title = 'Following' navigation={navigation}/>
-       
-
-//     </View>
-//   )
-// }
-
-// export default Following
-
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -33,7 +14,7 @@ import { useNavigation } from 'expo-router'
 
 
 // Dummy data for development
-const DUMMY_DATA = [
+const DUMMY_DATA: FollowItem[] = [
   {
     id: 1,
     type: 'user',

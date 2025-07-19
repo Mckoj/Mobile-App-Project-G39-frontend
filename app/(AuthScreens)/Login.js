@@ -13,6 +13,7 @@ import {
   StatusBar
 } from "react-native";
 import React, { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { auth } from "../config/Firebase"; // Ensure this is correct
 import {
@@ -23,6 +24,7 @@ import {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword,setShowPassword] = useState(false)
   const [isFocused, setIsFocused] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -58,7 +60,7 @@ const Login = () => {
   };
 
   return (
-      <ScrollView style = {{flex:1}}>
+      <ScrollView style = {{flexGrow:1}}>
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       {/* HEADER */}
       <View style={styles.header}>
@@ -77,13 +79,26 @@ const Login = () => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={[styles.inputText, isFocused && styles.inputFocused]}
-      />
+
+      <View style={[styles.passwordContainer, isFocused && styles.inputFocused]}>
+  <TextInput
+    placeholder="Password"
+    value={password}
+    onChangeText={setPassword}
+    secureTextEntry={showPassword}
+    style={styles.passwordInput}
+    onFocus={() => setIsFocused(true)}
+    onBlur={() => setIsFocused(false)}
+  />
+  <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+    <Ionicons
+      name={showPassword ? 'eye-off' : 'eye'}
+      size={22}
+      color="#666"
+    />
+  </TouchableOpacity>
+</View>
+
 
       {/* BUTTONS */}
       <View style={styles.buttonContainer}>
@@ -247,5 +262,20 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 10,
     marginRight: 6,
-  }
+  },
+  passwordContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  width: '90%',
+  marginVertical: 8,
+  paddingHorizontal: 15,
+  paddingVertical: 8,
+  backgroundColor: '#f5f6fa',
+  borderRadius: 10,
+},
+passwordInput: {
+  flex: 1,
+  fontSize: 16,
+  color: '#000',
+}
 });

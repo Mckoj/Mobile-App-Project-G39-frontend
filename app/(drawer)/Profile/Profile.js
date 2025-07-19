@@ -17,7 +17,7 @@ export default function ProfileScreen() {
 
   const handleChangePassword = () => {
     // 🔗 Integrate your Spring Boot change password API here
-    alert('Change Password triggered');
+      router.push('/(AuthScreens)/ChangePassword')
   };
 
   const handleFollowers = () => {
