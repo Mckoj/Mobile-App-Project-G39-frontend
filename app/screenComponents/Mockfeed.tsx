@@ -90,7 +90,7 @@ const mockPosts: Post[] = [
     answer: 'Great UI design is invisible to users. Here are key principles: Consistency - use familiar patterns and maintain visual hierarchy. Simplicity - remove unnecessary elements that don\'t serve a purpose. Accessibility - design for users with different abilities. Feedback - provide clear responses to user interactions. Performance - fast loading and smooth animations are crucial for good UX.',
     upvotes: 156,
     comments: 34,
-    shares: 8,
+    shares: 9,
     isUpvoted: false,
     createdAt: '2024-01-13T09:20:00Z'
   },
